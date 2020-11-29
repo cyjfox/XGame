@@ -18,7 +18,8 @@ namespace XGame
             ManualResetEvent isPlayerDoneEvent = new ManualResetEvent(false);
 
             GlobalVariable.SetValue("IsPlayerDoneEvent", isPlayerDoneEvent);
-
+           
+            Label lbl_GameResult = (Label)GlobalVariable.GetValue("LableControl_GameResult");
             while (true)
             {
                 Random random = new Random();
@@ -35,7 +36,7 @@ namespace XGame
 
                 isPlayerDoneEvent = (ManualResetEvent)GlobalVariable.GetValue("IsPlayerDoneEvent");
                 isPlayerDoneEvent.WaitOne();
-
+                isPlayerDoneEvent.Reset();
                 Int32 playerChoice = (Int32)GlobalVariable.GetValue("PlayerChoice");
 
                 Int32 gameResult = 0;
@@ -97,21 +98,26 @@ namespace XGame
                     gameResult = 2;
                 }
 
+                //将结果写入记录文件，并将结果通知界面
                 if (gameResult == 0)
                 {
-
+                    //GlobalVariable.SetValue("GameResult", 0);
+                    lbl_GameResult.Text = "平局";
                 }
                 else if (gameResult == 1)
                 {
-
+                    //GlobalVariable.SetValue("GameResult", 1);
+                    lbl_GameResult.Text = "失败";
                 }
                 else if (gameResult == 2)
                 {
-
+                    //GlobalVariable.SetValue("GameResult", 2);
+                    lbl_GameResult.Text = "胜利";
                 }
                 else
                 {
                     //错误
+                    //GlobalVariable.SetValue("GameResult", 3);
                 }
             }
         }
@@ -123,20 +129,46 @@ namespace XGame
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            GlobalVariable.SetValue("PlayerChoice", 0);
+            ManualResetEvent isPlayerDoneEvent = (ManualResetEvent)GlobalVariable.GetValue("IsPlayerDoneEvent");
+            isPlayerDoneEvent.Set();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void btn_StartGame_Click(object sender, EventArgs e)
         {
+            GlobalVariable.SetValue("LableControl_GameResult", lbl_Result);
             Thread workerThread = new Thread(new ThreadStart(XGameRun));
+            GlobalVariable.SetValue("WorkerThread", workerThread);
             workerThread.Start();
+            btn_StartGame.Enabled = false;
+            btn_EndGame.Enabled = true;
+        }
 
-            
+        private void btn_EndGame_Click(object sender, EventArgs e)
+        {
+            Thread workerThread = (Thread)GlobalVariable.GetValue("WorkerThread");
+            workerThread.Abort();
+            btn_StartGame.Enabled = true;
+            btn_EndGame.Enabled = false;
+        }
+
+        private void btn_Seissor_Click(object sender, EventArgs e)
+        {
+            GlobalVariable.SetValue("PlayerChoice", 1);
+            ManualResetEvent isPlayerDoneEvent = (ManualResetEvent)GlobalVariable.GetValue("IsPlayerDoneEvent");
+            isPlayerDoneEvent.Set();
+        }
+
+        private void btn_Cloth_Click(object sender, EventArgs e)
+        {
+            GlobalVariable.SetValue("PlayerChoice", 2);
+            ManualResetEvent isPlayerDoneEvent = (ManualResetEvent)GlobalVariable.GetValue("IsPlayerDoneEvent");
+            isPlayerDoneEvent.Set();
         }
     }
 }

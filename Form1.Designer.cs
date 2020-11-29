@@ -37,6 +37,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_StartGame = new System.Windows.Forms.Button();
+            this.btn_EndGame = new System.Windows.Forms.Button();
+            this.lbl_Result = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -89,6 +91,7 @@
             this.btn_Seissor.TabIndex = 1;
             this.btn_Seissor.Text = "剪刀";
             this.btn_Seissor.UseVisualStyleBackColor = true;
+            this.btn_Seissor.Click += new System.EventHandler(this.btn_Seissor_Click);
             // 
             // btn_Cloth
             // 
@@ -98,10 +101,11 @@
             this.btn_Cloth.TabIndex = 2;
             this.btn_Cloth.Text = "布";
             this.btn_Cloth.UseVisualStyleBackColor = true;
+            this.btn_Cloth.Click += new System.EventHandler(this.btn_Cloth_Click);
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(123, 383);
+            this.pictureBox2.Location = new System.Drawing.Point(267, 383);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(89, 50);
             this.pictureBox2.TabIndex = 3;
@@ -127,11 +131,33 @@
             this.btn_StartGame.UseVisualStyleBackColor = true;
             this.btn_StartGame.Click += new System.EventHandler(this.btn_StartGame_Click);
             // 
+            // btn_EndGame
+            // 
+            this.btn_EndGame.Enabled = false;
+            this.btn_EndGame.Location = new System.Drawing.Point(25, 73);
+            this.btn_EndGame.Name = "btn_EndGame";
+            this.btn_EndGame.Size = new System.Drawing.Size(100, 40);
+            this.btn_EndGame.TabIndex = 6;
+            this.btn_EndGame.Text = "结束游戏";
+            this.btn_EndGame.UseVisualStyleBackColor = true;
+            this.btn_EndGame.Click += new System.EventHandler(this.btn_EndGame_Click);
+            // 
+            // lbl_Result
+            // 
+            this.lbl_Result.AutoSize = true;
+            this.lbl_Result.Font = new System.Drawing.Font("宋体", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_Result.Location = new System.Drawing.Point(112, 383);
+            this.lbl_Result.Name = "lbl_Result";
+            this.lbl_Result.Size = new System.Drawing.Size(0, 56);
+            this.lbl_Result.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_Result);
+            this.Controls.Add(this.btn_EndGame);
             this.Controls.Add(this.btn_StartGame);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
@@ -160,6 +186,8 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_StartGame;
+        private System.Windows.Forms.Button btn_EndGame;
+        private System.Windows.Forms.Label lbl_Result;
     }
 }
 
