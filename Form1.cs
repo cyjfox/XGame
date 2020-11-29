@@ -13,22 +13,7 @@ namespace XGame
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btn_StartGame_Click(object sender, EventArgs e)
+        static void XGameRun()
         {
             ManualResetEvent isPlayerDoneEvent = new ManualResetEvent(false);
 
@@ -129,6 +114,29 @@ namespace XGame
                     //错误
                 }
             }
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btn_StartGame_Click(object sender, EventArgs e)
+        {
+            Thread workerThread = new Thread(new ThreadStart(XGameRun));
+            workerThread.Start();
+
+            
         }
     }
 }
