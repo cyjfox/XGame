@@ -31,11 +31,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_Stone = new System.Windows.Forms.Button();
+            this.btn_Seissor = new System.Windows.Forms.Button();
+            this.btn_Cloth = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -57,9 +60,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btn_Cloth);
+            this.groupBox1.Controls.Add(this.btn_Seissor);
+            this.groupBox1.Controls.Add(this.btn_Stone);
             this.groupBox1.Location = new System.Drawing.Point(7, 264);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(470, 95);
@@ -67,38 +70,59 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "请点击下面的按钮出拳";
             // 
-            // button1
+            // btn_Stone
             // 
-            this.button1.Location = new System.Drawing.Point(18, 32);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 40);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_Stone.Location = new System.Drawing.Point(18, 32);
+            this.btn_Stone.Name = "btn_Stone";
+            this.btn_Stone.Size = new System.Drawing.Size(100, 40);
+            this.btn_Stone.TabIndex = 0;
+            this.btn_Stone.Text = "石头";
+            this.btn_Stone.UseVisualStyleBackColor = true;
+            this.btn_Stone.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btn_Seissor
             // 
-            this.button2.Location = new System.Drawing.Point(158, 32);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 40);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Seissor.Location = new System.Drawing.Point(158, 32);
+            this.btn_Seissor.Name = "btn_Seissor";
+            this.btn_Seissor.Size = new System.Drawing.Size(100, 40);
+            this.btn_Seissor.TabIndex = 1;
+            this.btn_Seissor.Text = "剪刀";
+            this.btn_Seissor.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btn_Cloth
             // 
-            this.button3.Location = new System.Drawing.Point(300, 32);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 40);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_Cloth.Location = new System.Drawing.Point(300, 32);
+            this.btn_Cloth.Name = "btn_Cloth";
+            this.btn_Cloth.Size = new System.Drawing.Size(100, 40);
+            this.btn_Cloth.TabIndex = 2;
+            this.btn_Cloth.Text = "布";
+            this.btn_Cloth.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(123, 383);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(89, 50);
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(21, 383);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 24);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "结果：";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -106,6 +130,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,9 +141,11 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Cloth;
+        private System.Windows.Forms.Button btn_Seissor;
+        private System.Windows.Forms.Button btn_Stone;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label2;
     }
 }
 
