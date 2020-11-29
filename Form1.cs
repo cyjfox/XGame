@@ -21,5 +21,16 @@ namespace XGame
         {
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            while (true)
+            {
+                Random random = new Random();
+                Int32 choice = random.Next() % 3;
+
+
+            }
+        }
     }
 }
