@@ -20,7 +20,15 @@ namespace XGame
             GlobalVariable.SetValue("IsPlayerDoneEvent", isPlayerDoneEvent);
            
             Label lbl_GameResult = (Label)GlobalVariable.GetValue("LableControl_GameResult");
+            PictureBox picbox_MachineChoice = (PictureBox)GlobalVariable.GetValue("PictureBoxControl_MachineChoice");
+            PictureBox picbox_PlayerChoice = (PictureBox)GlobalVariable.GetValue("PictureBoxControl_PlayerChoice");
+
+            Image stoneImage = Image.FromFile("./stone.jpg");
+            Image seissorImage = Image.FromFile("./seissor.jpg");
+            Image clothImage = Image.FromFile("./cloth.jpg");
+
             while (true)
+
             {
                 Random random = new Random();
                 Int32 machineChoice = random.Next() % 3;
@@ -44,19 +52,26 @@ namespace XGame
                 //机器石头，人石头
                 if ((machineChoice == 0) && (playerChoice == 0))
                 {
+
                     //平局
+                    picbox_MachineChoice.BackgroundImage = stoneImage;
+                    picbox_PlayerChoice.Image = stoneImage;
                     gameResult = 0;
                 }
                 //机器剪刀，人剪刀
                 if ((machineChoice == 1) && (playerChoice == 1))
                 {
                     //平局
+                    picbox_MachineChoice.BackgroundImage = seissorImage;
+                    picbox_PlayerChoice.Image = seissorImage;
                     gameResult = 0;
                 }
                 //机器布，人布
                 if ((machineChoice == 2) && (playerChoice == 2))
                 {
                     //平局
+                    picbox_MachineChoice.BackgroundImage = clothImage;
+                    picbox_PlayerChoice.Image = clothImage;
                     gameResult = 0;
                 }
 
@@ -64,18 +79,24 @@ namespace XGame
                 if ((machineChoice == 0) && (playerChoice == 1))
                 {
                     //机器赢
+                    picbox_MachineChoice.BackgroundImage = stoneImage;
+                    picbox_PlayerChoice.Image = seissorImage;
                     gameResult = 1;
                 }
                 //机器剪刀，人布
                 if ((machineChoice == 1) && (playerChoice == 2))
                 {
                     //机器赢
+                    picbox_MachineChoice.BackgroundImage = seissorImage;
+                    picbox_PlayerChoice.Image = clothImage;
                     gameResult = 1;
                 }
                 //机器布，人石头
                 if ((machineChoice == 2) && (playerChoice == 0))
                 {
                     //机器赢
+                    picbox_MachineChoice.BackgroundImage = clothImage;
+                    picbox_PlayerChoice.Image = stoneImage;
                     gameResult = 1;
                 }
 
@@ -83,18 +104,24 @@ namespace XGame
                 if ((machineChoice == 0) && (playerChoice == 2))
                 {
                     //机器输
+                    picbox_MachineChoice.BackgroundImage = stoneImage;
+                    picbox_PlayerChoice.Image = clothImage;
                     gameResult = 2;
                 }
                 //机器剪刀，人石头
                 if ((machineChoice == 1) && (playerChoice == 0))
                 {
                     //机器输
+                    picbox_MachineChoice.BackgroundImage = seissorImage;
+                    picbox_PlayerChoice.Image = stoneImage;
                     gameResult = 2;
                 }
                 //机器布，人剪刀
                 if ((machineChoice == 2) && (playerChoice == 1))
                 {
                     //机器输
+                    picbox_MachineChoice.BackgroundImage = clothImage;
+                    picbox_PlayerChoice.Image = seissorImage;
                     gameResult = 2;
                 }
 
@@ -142,6 +169,8 @@ namespace XGame
         private void btn_StartGame_Click(object sender, EventArgs e)
         {
             GlobalVariable.SetValue("LableControl_GameResult", lbl_Result);
+            GlobalVariable.SetValue("PictureBoxControl_MachineChoice", picbox_MachineChoice);
+            GlobalVariable.SetValue("PictureBoxControl_PlayerChoice", picbox_PlayerChoice);
             Thread workerThread = new Thread(new ThreadStart(XGameRun));
             GlobalVariable.SetValue("WorkerThread", workerThread);
             workerThread.Start();
