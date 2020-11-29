@@ -50,8 +50,8 @@
             // 
             this.picbox_MachineChoice.Location = new System.Drawing.Point(165, 41);
             this.picbox_MachineChoice.Name = "picbox_MachineChoice";
-            this.picbox_MachineChoice.Size = new System.Drawing.Size(129, 199);
-            this.picbox_MachineChoice.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picbox_MachineChoice.Size = new System.Drawing.Size(139, 199);
+            this.picbox_MachineChoice.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picbox_MachineChoice.TabIndex = 0;
             this.picbox_MachineChoice.TabStop = false;
             // 
@@ -111,7 +111,7 @@
             this.picbox_PlayerChoice.Location = new System.Drawing.Point(340, 41);
             this.picbox_PlayerChoice.Name = "picbox_PlayerChoice";
             this.picbox_PlayerChoice.Size = new System.Drawing.Size(137, 199);
-            this.picbox_PlayerChoice.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picbox_PlayerChoice.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picbox_PlayerChoice.TabIndex = 3;
             this.picbox_PlayerChoice.TabStop = false;
             // 

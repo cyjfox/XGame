@@ -23,9 +23,13 @@ namespace XGame
             PictureBox picbox_MachineChoice = (PictureBox)GlobalVariable.GetValue("PictureBoxControl_MachineChoice");
             PictureBox picbox_PlayerChoice = (PictureBox)GlobalVariable.GetValue("PictureBoxControl_PlayerChoice");
 
-            Image stoneImage = Image.FromFile("./stone.jpg");
-            Image seissorImage = Image.FromFile("./seissor.jpg");
-            Image clothImage = Image.FromFile("./cloth.jpg");
+            Image stoneImageForMachineChoice = Image.FromFile("./stone.jpg");
+            Image seissorImageForMachineChoice = Image.FromFile("./seissor.jpg");
+            Image clothImageForMachineChoice = Image.FromFile("./cloth.jpg");
+
+            Image stoneImageForPlayerChoice = Image.FromFile("./stone.jpg");
+            Image seissorImageForPlayerChoice = Image.FromFile("./seissor.jpg");
+            Image clothImageForPlayerChoice = Image.FromFile("./cloth.jpg");
 
             while (true)
 
@@ -54,24 +58,24 @@ namespace XGame
                 {
 
                     //平局
-                    picbox_MachineChoice.BackgroundImage = stoneImage;
-                    picbox_PlayerChoice.Image = stoneImage;
+                    picbox_MachineChoice.Image = stoneImageForMachineChoice;
+                    picbox_PlayerChoice.Image = stoneImageForPlayerChoice;
                     gameResult = 0;
                 }
                 //机器剪刀，人剪刀
                 if ((machineChoice == 1) && (playerChoice == 1))
                 {
                     //平局
-                    picbox_MachineChoice.BackgroundImage = seissorImage;
-                    picbox_PlayerChoice.Image = seissorImage;
+                    picbox_MachineChoice.Image = seissorImageForMachineChoice;
+                    picbox_PlayerChoice.Image = seissorImageForPlayerChoice;
                     gameResult = 0;
                 }
                 //机器布，人布
                 if ((machineChoice == 2) && (playerChoice == 2))
                 {
                     //平局
-                    picbox_MachineChoice.BackgroundImage = clothImage;
-                    picbox_PlayerChoice.Image = clothImage;
+                    picbox_MachineChoice.Image = clothImageForMachineChoice;
+                    picbox_PlayerChoice.Image = clothImageForPlayerChoice;
                     gameResult = 0;
                 }
 
@@ -79,24 +83,24 @@ namespace XGame
                 if ((machineChoice == 0) && (playerChoice == 1))
                 {
                     //机器赢
-                    picbox_MachineChoice.BackgroundImage = stoneImage;
-                    picbox_PlayerChoice.Image = seissorImage;
+                    picbox_MachineChoice.Image = stoneImageForMachineChoice;
+                    picbox_PlayerChoice.Image = seissorImageForPlayerChoice;
                     gameResult = 1;
                 }
                 //机器剪刀，人布
                 if ((machineChoice == 1) && (playerChoice == 2))
                 {
                     //机器赢
-                    picbox_MachineChoice.BackgroundImage = seissorImage;
-                    picbox_PlayerChoice.Image = clothImage;
+                    picbox_MachineChoice.Image = seissorImageForMachineChoice;
+                    picbox_PlayerChoice.Image = clothImageForPlayerChoice;
                     gameResult = 1;
                 }
                 //机器布，人石头
                 if ((machineChoice == 2) && (playerChoice == 0))
                 {
                     //机器赢
-                    picbox_MachineChoice.BackgroundImage = clothImage;
-                    picbox_PlayerChoice.Image = stoneImage;
+                    picbox_MachineChoice.Image = clothImageForMachineChoice;
+                    picbox_PlayerChoice.Image = stoneImageForPlayerChoice;
                     gameResult = 1;
                 }
 
@@ -104,24 +108,24 @@ namespace XGame
                 if ((machineChoice == 0) && (playerChoice == 2))
                 {
                     //机器输
-                    picbox_MachineChoice.BackgroundImage = stoneImage;
-                    picbox_PlayerChoice.Image = clothImage;
+                    picbox_MachineChoice.Image = stoneImageForMachineChoice;
+                    picbox_PlayerChoice.Image = clothImageForPlayerChoice;
                     gameResult = 2;
                 }
                 //机器剪刀，人石头
                 if ((machineChoice == 1) && (playerChoice == 0))
                 {
                     //机器输
-                    picbox_MachineChoice.BackgroundImage = seissorImage;
-                    picbox_PlayerChoice.Image = stoneImage;
+                    picbox_MachineChoice.Image = seissorImageForMachineChoice;
+                    picbox_PlayerChoice.Image = stoneImageForPlayerChoice;
                     gameResult = 2;
                 }
                 //机器布，人剪刀
                 if ((machineChoice == 2) && (playerChoice == 1))
                 {
                     //机器输
-                    picbox_MachineChoice.BackgroundImage = clothImage;
-                    picbox_PlayerChoice.Image = seissorImage;
+                    picbox_MachineChoice.Image = clothImageForMachineChoice;
+                    picbox_PlayerChoice.Image = seissorImageForPlayerChoice;
                     gameResult = 2;
                 }
 
