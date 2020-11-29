@@ -36,6 +36,7 @@
             this.btn_Cloth = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_StartGame = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -43,9 +44,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(7, 8);
+            this.pictureBox1.Location = new System.Drawing.Point(165, 8);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(471, 232);
+            this.pictureBox1.Size = new System.Drawing.Size(313, 232);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -116,11 +117,22 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "结果：";
             // 
+            // btn_StartGame
+            // 
+            this.btn_StartGame.Location = new System.Drawing.Point(25, 8);
+            this.btn_StartGame.Name = "btn_StartGame";
+            this.btn_StartGame.Size = new System.Drawing.Size(100, 40);
+            this.btn_StartGame.TabIndex = 5;
+            this.btn_StartGame.Text = "开始游戏";
+            this.btn_StartGame.UseVisualStyleBackColor = true;
+            this.btn_StartGame.Click += new System.EventHandler(this.btn_StartGame_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_StartGame);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.groupBox1);
@@ -147,6 +159,7 @@
         private System.Windows.Forms.Button btn_Stone;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_StartGame;
     }
 }
 
