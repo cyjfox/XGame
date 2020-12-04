@@ -101,7 +101,7 @@
             this.btn_Stone.Size = new System.Drawing.Size(100, 57);
             this.btn_Stone.TabIndex = 0;
             this.btn_Stone.UseVisualStyleBackColor = true;
-            this.btn_Stone.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Stone.Click += new System.EventHandler(this.btn_Stone_Click);
             // 
             // picbox_PlayerChoice
             // 
@@ -213,6 +213,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picbox_PlayerChoice)).EndInit();

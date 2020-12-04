@@ -226,7 +226,7 @@ namespace XGame
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_Stone_Click(object sender, EventArgs e)
         {
             GlobalVariable.SetValue("PlayerChoice", 0);
             ManualResetEvent isPlayerDoneEvent = (ManualResetEvent)GlobalVariable.GetValue("IsPlayerDoneEvent");
@@ -278,6 +278,20 @@ namespace XGame
             if (chcbox_ToOpenSignal.Checked == true)
             {
                 ToOpenSignal();
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Thread workerThread = (Thread)GlobalVariable.GetValue("WorkerThread");
+            if (workerThread != null)
+            {
+                workerThread.Abort();
+            }
+            FileStream recordFileStream = (FileStream)GlobalVariable.GetValue("RecordFileStream");
+            if (recordFileStream != null)
+            {
+                recordFileStream.Close();
             }
         }
     }
