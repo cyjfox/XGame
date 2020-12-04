@@ -8,11 +8,52 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+using System.IO;
 
 namespace XGame
 {
     public partial class Form1 : Form
     {
+        static void ToOpenSignal()
+        {
+            SoundPlayer soundPlayer = new SoundPlayer("./TestSound.wav");
+            soundPlayer.Play();
+            Int32[] stoneWavData = new Int32[192000];
+            Int32[] seissorWavData = new Int32[192000];
+            Int32[] clothWavData = new Int32[192000];
+
+            Int32 dataCountPerCircle = 192000 / 96000;
+            Int32[] sample = new int[dataCountPerCircle];
+            for (int i = 0; i < dataCountPerCircle; i++)
+            {
+                sample[i] = (Int32)Math.Sin(2 * 3.141593 / dataCountPerCircle);
+            }
+            for (int i = 0; i < 192000; i++)
+            {
+                /*
+                for (int j = 0; j < 96000; j++)
+                {
+                    
+                }
+                */
+                /*
+                if ((i % 96000) < 96000)
+                {
+                    
+                }
+                */
+
+                //stoneWavData[i] = (int)Math.Sin((double)((i % 96000) / 96000));
+                stoneWavData[i] = sample[i % dataCountPerCircle];
+            }
+            //Stream stoneWavStream = new MemoryStream(stoneWavData, true);
+            //wavStream.Write()
+            //SoundPlayer soundPlayer1 = new SoundPlayer(wavStream);
+
+            
+        }
+
         static void XGameRun()
         {
             ManualResetEvent isPlayerDoneEvent = new ManualResetEvent(false);
@@ -149,6 +190,7 @@ namespace XGame
                 {
                     //错误
                     //GlobalVariable.SetValue("GameResult", 3);
+                    lbl_GameResult.Text = "错误";
                 }
             }
         }
@@ -202,6 +244,14 @@ namespace XGame
             GlobalVariable.SetValue("PlayerChoice", 2);
             ManualResetEvent isPlayerDoneEvent = (ManualResetEvent)GlobalVariable.GetValue("IsPlayerDoneEvent");
             isPlayerDoneEvent.Set();
+        }
+
+        private void chcbox_ToOpenSignal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chcbox_ToOpenSignal.Checked == true)
+            {
+                ToOpenSignal();
+            }
         }
     }
 }

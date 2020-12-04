@@ -28,32 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picbox_MachineChoice = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_Stone = new System.Windows.Forms.Button();
-            this.btn_Seissor = new System.Windows.Forms.Button();
             this.btn_Cloth = new System.Windows.Forms.Button();
+            this.btn_Seissor = new System.Windows.Forms.Button();
+            this.btn_Stone = new System.Windows.Forms.Button();
             this.picbox_PlayerChoice = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_StartGame = new System.Windows.Forms.Button();
             this.btn_EndGame = new System.Windows.Forms.Button();
             this.lbl_Result = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picbox_MachineChoice)).BeginInit();
+            this.chcbox_ToOpenSignal = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.picbox_MachineChoice = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_PlayerChoice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox_MachineChoice)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picbox_MachineChoice
-            // 
-            this.picbox_MachineChoice.Location = new System.Drawing.Point(165, 41);
-            this.picbox_MachineChoice.Name = "picbox_MachineChoice";
-            this.picbox_MachineChoice.Size = new System.Drawing.Size(139, 199);
-            this.picbox_MachineChoice.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picbox_MachineChoice.TabIndex = 0;
-            this.picbox_MachineChoice.TabStop = false;
             // 
             // label1
             // 
@@ -76,39 +68,44 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "请点击下面的按钮出拳";
             // 
-            // btn_Stone
-            // 
-            this.btn_Stone.Location = new System.Drawing.Point(18, 32);
-            this.btn_Stone.Name = "btn_Stone";
-            this.btn_Stone.Size = new System.Drawing.Size(100, 40);
-            this.btn_Stone.TabIndex = 0;
-            this.btn_Stone.Text = "石头";
-            this.btn_Stone.UseVisualStyleBackColor = true;
-            this.btn_Stone.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btn_Seissor
-            // 
-            this.btn_Seissor.Location = new System.Drawing.Point(158, 32);
-            this.btn_Seissor.Name = "btn_Seissor";
-            this.btn_Seissor.Size = new System.Drawing.Size(100, 40);
-            this.btn_Seissor.TabIndex = 1;
-            this.btn_Seissor.Text = "剪刀";
-            this.btn_Seissor.UseVisualStyleBackColor = true;
-            this.btn_Seissor.Click += new System.EventHandler(this.btn_Seissor_Click);
-            // 
             // btn_Cloth
             // 
-            this.btn_Cloth.Location = new System.Drawing.Point(300, 32);
+            this.btn_Cloth.BackgroundImage = global::XGame.Properties.Resources.cloth;
+            this.btn_Cloth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Cloth.Location = new System.Drawing.Point(304, 20);
             this.btn_Cloth.Name = "btn_Cloth";
-            this.btn_Cloth.Size = new System.Drawing.Size(100, 40);
+            this.btn_Cloth.Size = new System.Drawing.Size(100, 57);
             this.btn_Cloth.TabIndex = 2;
-            this.btn_Cloth.Text = "布";
             this.btn_Cloth.UseVisualStyleBackColor = true;
             this.btn_Cloth.Click += new System.EventHandler(this.btn_Cloth_Click);
             // 
+            // btn_Seissor
+            // 
+            this.btn_Seissor.BackgroundImage = global::XGame.Properties.Resources.seissor;
+            this.btn_Seissor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Seissor.Location = new System.Drawing.Point(158, 20);
+            this.btn_Seissor.Name = "btn_Seissor";
+            this.btn_Seissor.Size = new System.Drawing.Size(100, 57);
+            this.btn_Seissor.TabIndex = 1;
+            this.btn_Seissor.UseVisualStyleBackColor = true;
+            this.btn_Seissor.Click += new System.EventHandler(this.btn_Seissor_Click);
+            // 
+            // btn_Stone
+            // 
+            this.btn_Stone.BackgroundImage = global::XGame.Properties.Resources.stone;
+            this.btn_Stone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_Stone.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_Stone.ForeColor = System.Drawing.Color.Red;
+            this.btn_Stone.Location = new System.Drawing.Point(6, 20);
+            this.btn_Stone.Name = "btn_Stone";
+            this.btn_Stone.Size = new System.Drawing.Size(100, 57);
+            this.btn_Stone.TabIndex = 0;
+            this.btn_Stone.UseVisualStyleBackColor = true;
+            this.btn_Stone.Click += new System.EventHandler(this.button1_Click);
+            // 
             // picbox_PlayerChoice
             // 
-            this.picbox_PlayerChoice.Location = new System.Drawing.Point(340, 41);
+            this.picbox_PlayerChoice.Location = new System.Drawing.Point(165, 41);
             this.picbox_PlayerChoice.Name = "picbox_PlayerChoice";
             this.picbox_PlayerChoice.Size = new System.Drawing.Size(137, 199);
             this.picbox_PlayerChoice.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -155,33 +152,58 @@
             this.lbl_Result.Size = new System.Drawing.Size(0, 56);
             this.lbl_Result.TabIndex = 7;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(164, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "机器的出拳";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label4.Location = new System.Drawing.Point(350, 15);
+            this.label4.Location = new System.Drawing.Point(163, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 9;
             this.label4.Text = "你的出拳";
+            // 
+            // chcbox_ToOpenSignal
+            // 
+            this.chcbox_ToOpenSignal.AutoSize = true;
+            this.chcbox_ToOpenSignal.Checked = true;
+            this.chcbox_ToOpenSignal.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chcbox_ToOpenSignal.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chcbox_ToOpenSignal.Location = new System.Drawing.Point(25, 174);
+            this.chcbox_ToOpenSignal.Name = "chcbox_ToOpenSignal";
+            this.chcbox_ToOpenSignal.Size = new System.Drawing.Size(113, 25);
+            this.chcbox_ToOpenSignal.TabIndex = 10;
+            this.chcbox_ToOpenSignal.Text = "开启信号";
+            this.chcbox_ToOpenSignal.UseVisualStyleBackColor = true;
+            this.chcbox_ToOpenSignal.CheckedChanged += new System.EventHandler(this.chcbox_ToOpenSignal_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label3.Location = new System.Drawing.Point(337, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "机器的出拳";
+            // 
+            // picbox_MachineChoice
+            // 
+            this.picbox_MachineChoice.Location = new System.Drawing.Point(338, 41);
+            this.picbox_MachineChoice.Name = "picbox_MachineChoice";
+            this.picbox_MachineChoice.Size = new System.Drawing.Size(139, 199);
+            this.picbox_MachineChoice.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picbox_MachineChoice.TabIndex = 11;
+            this.picbox_MachineChoice.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.picbox_MachineChoice);
+            this.Controls.Add(this.chcbox_ToOpenSignal);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_Result);
             this.Controls.Add(this.btn_EndGame);
             this.Controls.Add(this.btn_StartGame);
@@ -189,21 +211,18 @@
             this.Controls.Add(this.picbox_PlayerChoice);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.picbox_MachineChoice);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picbox_MachineChoice)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picbox_PlayerChoice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox_MachineChoice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox picbox_MachineChoice;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btn_Cloth;
@@ -214,8 +233,10 @@
         private System.Windows.Forms.Button btn_StartGame;
         private System.Windows.Forms.Button btn_EndGame;
         private System.Windows.Forms.Label lbl_Result;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chcbox_ToOpenSignal;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox picbox_MachineChoice;
     }
 }
 
