@@ -17,6 +17,7 @@ namespace XGame
     {
         static void ToOpenSignal()
         {
+            /*
             SoundPlayer soundPlayer = new SoundPlayer("./TestSound.wav");
             soundPlayer.Play();
             Int32[] stoneWavData = new Int32[192000];
@@ -31,18 +32,18 @@ namespace XGame
             }
             for (int i = 0; i < 192000; i++)
             {
-                /*
+                
                 for (int j = 0; j < 96000; j++)
                 {
                     
                 }
-                */
-                /*
+                
+                
                 if ((i % 96000) < 96000)
                 {
                     
                 }
-                */
+                
 
                 //stoneWavData[i] = (int)Math.Sin((double)((i % 96000) / 96000));
                 stoneWavData[i] = sample[i % dataCountPerCircle];
@@ -50,8 +51,25 @@ namespace XGame
             //Stream stoneWavStream = new MemoryStream(stoneWavData, true);
             //wavStream.Write()
             //SoundPlayer soundPlayer1 = new SoundPlayer(wavStream);
+            */
 
+            uint bitPerSample = 32;
+            uint SampleCountPerChannel = 100000;
+            ushort channelCount = 2;
+            uint sampleRate = 192000;
+            uint dataSize = bitPerSample / 8 * SampleCountPerChannel * channelCount;
+            Byte[] wavData = new Byte[dataSize];
+            Random random = new Random();
+            random.NextBytes(wavData);
             
+            Stream stoneWavStream = WavFile.GenerateWavFileStream(bitPerSample, SampleCountPerChannel, false, channelCount, sampleRate, wavData);
+            SoundPlayer soundPlayer = new SoundPlayer();
+            stoneWavStream.Position = 0;
+            soundPlayer.Stream = null;
+            soundPlayer.Stream = stoneWavStream;
+            soundPlayer.Load();
+            soundPlayer.PlaySync();
+            //soundPlayer.Play();
         }
 
         static void XGameRun()

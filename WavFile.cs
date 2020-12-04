@@ -1,11 +1,16 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace XGame
 {
 	public class WavFile
 	{
-		static Stream GenerateWavFileStream()
+        private WavFile()
+        {
+        }
+
+        public static Stream GenerateWavFileStream(UInt32 bitDepth, UInt32 totalSampleCount, Boolean isFloatingPoint,ushort channelCount, UInt32 sampleRate, Byte[] data)
         {
 			Stream stream = new MemoryStream();
 			stream.Position = 0;
@@ -15,8 +20,10 @@ namespace XGame
             // Chunk ID.
             stream.Write(Encoding.ASCII.GetBytes("RIFF"), 0, 4);
 
+            UInt32 dataSize = (bitDepth / 8) * totalSampleCount * channelCount; ;
+
             // Chunk size.
-            stream.Write(BitConverter.GetBytes(((bitDepth / 8) * totalSampleCount) + 36), 0, 4);
+            stream.Write(BitConverter.GetBytes(dataSize + 36), 0, 4);
 
             // Format.
             stream.Write(Encoding.ASCII.GetBytes("WAVE"), 0, 4);
@@ -55,7 +62,10 @@ namespace XGame
             stream.Write(Encoding.ASCII.GetBytes("data"), 0, 4);
 
             // Sub-chunk 2 size.
-            stream.Write(BitConverter.GetBytes((bitDepth / 8) * totalSampleCount), 0, 4);
+            
+            stream.Write(BitConverter.GetBytes(dataSize), 0, 4);
+
+            stream.Write(data, 0, (int)dataSize);
 
             return stream;
         }
