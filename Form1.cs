@@ -90,6 +90,8 @@ namespace XGame
             Image seissorImageForPlayerChoice = Image.FromFile("./seissor.jpg");
             Image clothImageForPlayerChoice = Image.FromFile("./cloth.jpg");
 
+            FileStream recordFileStream = File.OpenWrite("./Record.txt");
+            GlobalVariable.SetValue("RecordFileStream", recordFileStream);
             while (true)
 
             {
@@ -188,20 +190,20 @@ namespace XGame
                     gameResult = 2;
                 }
 
-                //将结果写入记录文件，并将结果通知界面
+                //将结果通知界面
                 if (gameResult == 0)
                 {
-                    //GlobalVariable.SetValue("GameResult", 0);
+                    GlobalVariable.SetValue("GameResult", 0);
                     lbl_GameResult.Text = "平局";
                 }
                 else if (gameResult == 1)
                 {
-                    //GlobalVariable.SetValue("GameResult", 1);
+                    GlobalVariable.SetValue("GameResult", 1);
                     lbl_GameResult.Text = "失败";
                 }
                 else if (gameResult == 2)
                 {
-                    //GlobalVariable.SetValue("GameResult", 2);
+                    GlobalVariable.SetValue("GameResult", 2);
                     lbl_GameResult.Text = "胜利";
                 }
                 else
@@ -210,6 +212,12 @@ namespace XGame
                     //GlobalVariable.SetValue("GameResult", 3);
                     lbl_GameResult.Text = "错误";
                 }
+
+                //将结果写入记录文件
+                
+                String resultString = String.Format("{0:G}  {1:D}  {2:D}  {3:D}  \r\n", System.DateTime.Now, playerChoice, machineChoice, gameResult);
+                byte[] resultStringBuffer = Encoding.ASCII.GetBytes(resultString);
+                recordFileStream.Write(resultStringBuffer, 0, resultStringBuffer.Length);
             }
         }
 
@@ -248,6 +256,7 @@ namespace XGame
             workerThread.Abort();
             btn_StartGame.Enabled = true;
             btn_EndGame.Enabled = false;
+            ((FileStream)GlobalVariable.GetValue("RecordFileStream")).Close();
         }
 
         private void btn_Seissor_Click(object sender, EventArgs e)
