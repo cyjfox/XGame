@@ -42,6 +42,14 @@
             this.chcbox_ToOpenSignal = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.picbox_MachineChoice = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_WinCount = new System.Windows.Forms.Label();
+            this.lbl_DrawCount = new System.Windows.Forms.Label();
+            this.lbl_LoseCount = new System.Windows.Forms.Label();
+            this.lbl_WinCountPercentage = new System.Windows.Forms.Label();
+            this.lbl_DrawCountPercentage = new System.Windows.Forms.Label();
+            this.lbl_LoseCountPercentage = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_PlayerChoice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_MachineChoice)).BeginInit();
@@ -54,7 +62,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.label1.Text = "胜利：";
             // 
             // groupBox1
             // 
@@ -195,11 +203,89 @@
             this.picbox_MachineChoice.TabIndex = 11;
             this.picbox_MachineChoice.TabStop = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(508, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "平局：";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(508, 101);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 12);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "失败：";
+            // 
+            // lbl_WinCount
+            // 
+            this.lbl_WinCount.AutoSize = true;
+            this.lbl_WinCount.Location = new System.Drawing.Point(551, 41);
+            this.lbl_WinCount.Name = "lbl_WinCount";
+            this.lbl_WinCount.Size = new System.Drawing.Size(0, 12);
+            this.lbl_WinCount.TabIndex = 15;
+            // 
+            // lbl_DrawCount
+            // 
+            this.lbl_DrawCount.AutoSize = true;
+            this.lbl_DrawCount.Location = new System.Drawing.Point(551, 73);
+            this.lbl_DrawCount.Name = "lbl_DrawCount";
+            this.lbl_DrawCount.Size = new System.Drawing.Size(0, 12);
+            this.lbl_DrawCount.TabIndex = 16;
+            // 
+            // lbl_LoseCount
+            // 
+            this.lbl_LoseCount.AutoSize = true;
+            this.lbl_LoseCount.Location = new System.Drawing.Point(551, 101);
+            this.lbl_LoseCount.Name = "lbl_LoseCount";
+            this.lbl_LoseCount.Size = new System.Drawing.Size(0, 12);
+            this.lbl_LoseCount.TabIndex = 17;
+            // 
+            // lbl_WinCountPercentage
+            // 
+            this.lbl_WinCountPercentage.AutoSize = true;
+            this.lbl_WinCountPercentage.Location = new System.Drawing.Point(616, 41);
+            this.lbl_WinCountPercentage.Name = "lbl_WinCountPercentage";
+            this.lbl_WinCountPercentage.Size = new System.Drawing.Size(41, 12);
+            this.lbl_WinCountPercentage.TabIndex = 18;
+            this.lbl_WinCountPercentage.Text = "label7";
+            // 
+            // lbl_DrawCountPercentage
+            // 
+            this.lbl_DrawCountPercentage.AutoSize = true;
+            this.lbl_DrawCountPercentage.Location = new System.Drawing.Point(616, 73);
+            this.lbl_DrawCountPercentage.Name = "lbl_DrawCountPercentage";
+            this.lbl_DrawCountPercentage.Size = new System.Drawing.Size(41, 12);
+            this.lbl_DrawCountPercentage.TabIndex = 19;
+            this.lbl_DrawCountPercentage.Text = "label7";
+            // 
+            // lbl_LoseCountPercentage
+            // 
+            this.lbl_LoseCountPercentage.AutoSize = true;
+            this.lbl_LoseCountPercentage.Location = new System.Drawing.Point(616, 101);
+            this.lbl_LoseCountPercentage.Name = "lbl_LoseCountPercentage";
+            this.lbl_LoseCountPercentage.Size = new System.Drawing.Size(41, 12);
+            this.lbl_LoseCountPercentage.TabIndex = 20;
+            this.lbl_LoseCountPercentage.Text = "label7";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_LoseCountPercentage);
+            this.Controls.Add(this.lbl_DrawCountPercentage);
+            this.Controls.Add(this.lbl_WinCountPercentage);
+            this.Controls.Add(this.lbl_LoseCount);
+            this.Controls.Add(this.lbl_DrawCount);
+            this.Controls.Add(this.lbl_WinCount);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.picbox_MachineChoice);
             this.Controls.Add(this.chcbox_ToOpenSignal);
@@ -238,6 +324,14 @@
         private System.Windows.Forms.CheckBox chcbox_ToOpenSignal;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox picbox_MachineChoice;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbl_WinCount;
+        private System.Windows.Forms.Label lbl_DrawCount;
+        private System.Windows.Forms.Label lbl_LoseCount;
+        private System.Windows.Forms.Label lbl_WinCountPercentage;
+        private System.Windows.Forms.Label lbl_DrawCountPercentage;
+        private System.Windows.Forms.Label lbl_LoseCountPercentage;
     }
 }
 

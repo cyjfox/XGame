@@ -77,7 +77,14 @@ namespace XGame
             ManualResetEvent isPlayerDoneEvent = new ManualResetEvent(false);
 
             GlobalVariable.SetValue("IsPlayerDoneEvent", isPlayerDoneEvent);
-           
+
+            Label lbl_WinCount = (Label)GlobalVariable.GetValue("lbl_WinCount");
+            Label lbl_DrawCount = (Label)GlobalVariable.GetValue("lbl_DrawCount");
+            Label lbl_LoseCount = (Label)GlobalVariable.GetValue("lbl_LoseCount");
+            Label lbl_WinCountPercentage = (Label)GlobalVariable.GetValue("lbl_WinCountPercentage");
+            Label lbl_DrawCountPercentage = (Label)GlobalVariable.GetValue("lbl_DrawCountPercentage");
+            Label lbl_LoseCountPercentage = (Label)GlobalVariable.GetValue("lbl_LoseCountPercentage");
+
             Label lbl_GameResult = (Label)GlobalVariable.GetValue("LableControl_GameResult");
             PictureBox picbox_MachineChoice = (PictureBox)GlobalVariable.GetValue("PictureBoxControl_MachineChoice");
             PictureBox picbox_PlayerChoice = (PictureBox)GlobalVariable.GetValue("PictureBoxControl_PlayerChoice");
@@ -90,10 +97,9 @@ namespace XGame
             Image seissorImageForPlayerChoice = Image.FromFile("./seissor.jpg");
             Image clothImageForPlayerChoice = Image.FromFile("./cloth.jpg");
 
-            FileStream recordFileStream = File.OpenWrite("./Record.txt");
-            GlobalVariable.SetValue("RecordFileStream", recordFileStream);
+            
+            //GlobalVariable.SetValue("RecordFileStream", recordFileStream);
             while (true)
-
             {
                 Random random = new Random();
                 Int32 machineChoice = random.Next() % 3;
@@ -214,10 +220,19 @@ namespace XGame
                 }
 
                 //将结果写入记录文件
-                
+                //FileStream recordFileStream = File.OpenWrite("./Record.txt");
+                StreamWriter recordFileStreamWriter = File.AppendText("./Record.txt");
+
                 String resultString = String.Format("{0:G}  {1:D}  {2:D}  {3:D}  \r\n", System.DateTime.Now, playerChoice, machineChoice, gameResult);
-                byte[] resultStringBuffer = Encoding.ASCII.GetBytes(resultString);
-                recordFileStream.Write(resultStringBuffer, 0, resultStringBuffer.Length);
+                //byte[] resultStringBuffer = Encoding.ASCII.GetBytes(resultString);
+                
+                //recordFileStream.Write(resultStringBuffer, 0, resultStringBuffer.Length);
+                //recordFileStream.Close();
+                
+
+                recordFileStreamWriter.Write(resultString);
+                recordFileStreamWriter.Close();
+                Form1.UpdateDashboard(lbl_WinCount, lbl_DrawCount, lbl_LoseCount, lbl_WinCountPercentage, lbl_DrawCountPercentage, lbl_LoseCountPercentage);
             }
         }
 
@@ -236,6 +251,79 @@ namespace XGame
         private void Form1_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false;
+            GlobalVariable.SetValue("lbl_WinCount", lbl_WinCount);
+            GlobalVariable.SetValue("lbl_DrawCount", lbl_DrawCount);
+            GlobalVariable.SetValue("lbl_LoseCount", lbl_LoseCount);
+            GlobalVariable.SetValue("lbl_WinCountPercentage", lbl_WinCountPercentage);
+            GlobalVariable.SetValue("lbl_DrawCountPercentage", lbl_DrawCountPercentage);
+            GlobalVariable.SetValue("lbl_LoseCountPercentage", lbl_LoseCountPercentage);
+            UpdateDashboard(lbl_WinCount, lbl_DrawCount, lbl_LoseCount, lbl_WinCountPercentage, lbl_DrawCountPercentage, lbl_LoseCountPercentage);
+        }
+
+        private static void UpdateDashboard(Label lbl_WinCount, Label lbl_DrawCount, Label lbl_LoseCount, Label lbl_WinCountPercentage, Label lbl_DrawCountPercentage, Label lbl_LoseCountPercentage)
+        {
+            FileStream recordFileStream = File.OpenRead("./Record.txt");
+            MemoryStream memoryStream = new MemoryStream();
+            byte[] buffer = new byte[1];
+            Boolean isLastReturnChar = false;
+            UInt32 winCount = 0;
+            UInt32 drawCount = 0;
+            UInt32 loseCount = 0;
+            memoryStream.Position = 0;
+            while (recordFileStream.Read(buffer, 0, 1) > 0)
+            {
+                memoryStream.Write(buffer, 0, 1);
+
+                if (buffer[0] == Encoding.ASCII.GetBytes("\r")[0])
+                {
+                    isLastReturnChar = true;
+                }
+
+                if (buffer[0] == Encoding.ASCII.GetBytes("\n")[0] && isLastReturnChar)
+                {
+                    //break;
+                    memoryStream.Flush();
+                    byte[] resultStringBuffer = memoryStream.GetBuffer();
+                    GameResult gameResult = GameResult.FromBuffer(resultStringBuffer);
+                    Int32 gameResultCode = gameResult.GetGameResultCode();
+                    if (gameResultCode == 0)
+                    {
+                        //平局
+                        drawCount++;
+                    }
+                    else if (gameResultCode == 1)
+                    {
+                        //失败
+                        loseCount++;
+                    }
+                    else if (gameResultCode == 2)
+                    {
+                        //胜利
+                        winCount++;
+                    }
+                    else
+                    {
+                        MessageBox.Show("解析结果代码出错!");
+                    }
+
+                    memoryStream.Position = 0;
+                }
+            }
+
+            UInt32 totalCount = drawCount + winCount + loseCount;
+            Double winCountPercentage = (Double)winCount / (Double)totalCount;
+            Double drawCountPercentage = (Double)drawCount / (Double)totalCount;
+            Double loseCountPercentage = (Double)loseCount / (Double)totalCount;
+
+            lbl_WinCount.Text = winCount.ToString();
+            lbl_DrawCount.Text = drawCount.ToString();
+            lbl_LoseCount.Text = loseCount.ToString();
+
+            lbl_WinCountPercentage.Text = winCountPercentage.ToString();
+            lbl_DrawCountPercentage.Text = drawCountPercentage.ToString();
+            lbl_LoseCountPercentage.Text = loseCountPercentage.ToString();
+
+            recordFileStream.Close();
         }
 
         private void btn_StartGame_Click(object sender, EventArgs e)
@@ -293,6 +381,11 @@ namespace XGame
             {
                 recordFileStream.Close();
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
