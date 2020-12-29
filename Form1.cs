@@ -101,8 +101,11 @@ namespace XGame
             //GlobalVariable.SetValue("RecordFileStream", recordFileStream);
             while (true)
             {
+                /*
                 Random random = new Random();
                 Int32 machineChoice = random.Next() % 3;
+                */
+                Int32 machineChoice = new Random().Next(3);
                 //GlobalVariable.
                 GlobalVariable.SetValue("MachineChoice", machineChoice);
 
@@ -344,7 +347,7 @@ namespace XGame
             workerThread.Abort();
             btn_StartGame.Enabled = true;
             btn_EndGame.Enabled = false;
-            ((FileStream)GlobalVariable.GetValue("RecordFileStream")).Close();
+            //((FileStream)GlobalVariable.GetValue("RecordFileStream")).Close();
         }
 
         private void btn_Seissor_Click(object sender, EventArgs e)
