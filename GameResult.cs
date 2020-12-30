@@ -64,7 +64,7 @@ namespace XGame
             gameResult.playGameTimeString = streamReader.ReadToEnd();
             gameResult.playGameTimeString = gameResult.playGameTimeString.Trim();
 
-            gameResult.playGameTime = DateTime.Parse(gameResult.playGameTimeString);
+            gameResult.playGameTime = DateTime.ParseExact(gameResult.playGameTimeString, "yyyyMMddHHmmssffff", System.Globalization.CultureInfo.CurrentCulture);
 
 
 

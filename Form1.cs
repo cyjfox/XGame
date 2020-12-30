@@ -105,7 +105,11 @@ namespace XGame
                 Random random = new Random();
                 Int32 machineChoice = random.Next() % 3;
                 */
-                Int32 machineChoice = new Random().Next(3);
+                //Random rand = new Random((int)DateTime.Now.Ticks);
+
+                Random random = new Random(Guid.NewGuid().GetHashCode());
+                Int32 machineChoice = random.Next(3);
+                //Int32 machineChoice = new Random().Next(3);
                 //GlobalVariable.
                 GlobalVariable.SetValue("MachineChoice", machineChoice);
 
@@ -226,7 +230,7 @@ namespace XGame
                 //FileStream recordFileStream = File.OpenWrite("./Record.txt");
                 StreamWriter recordFileStreamWriter = File.AppendText("./Record.txt");
 
-                String resultString = String.Format("{0:G}  {1:D}  {2:D}  {3:D}  \r\n", System.DateTime.Now, playerChoice, machineChoice, gameResult);
+                String resultString = String.Format("{0:G}  {1:D}  {2:D}  {3:D}  \r\n", System.DateTime.Now.ToString("yyyyMMddHHmmssffff"), playerChoice, machineChoice, gameResult);
                 //byte[] resultStringBuffer = Encoding.ASCII.GetBytes(resultString);
                 
                 //recordFileStream.Write(resultStringBuffer, 0, resultStringBuffer.Length);
