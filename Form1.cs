@@ -15,6 +15,15 @@ namespace XGame
 {
     public partial class Form1 : Form
     {
+        static SoundPlayer stoneSoundPlayer = new SoundPlayer();
+        static SoundPlayer seissorSoundPlayer = new SoundPlayer();
+        static SoundPlayer clothSoundPlayer = new SoundPlayer();
+
+
+        static Stream stoneWavStream = WavFile.GenerateWavFileStream(32, 100000, false, 2, 192000, 1.0, 2000, Math.PI / 2);
+        static Stream seissorWavStream = WavFile.GenerateWavFileStream(32, 100000, false, 2, 192000, 1.0, 4000, Math.PI / 2);
+        static Stream clothWavStream= WavFile.GenerateWavFileStream(32, 100000, false, 2, 192000, 1.0, 6000, Math.PI / 2);
+        static Boolean toOpenSignal = true;
         static void ToOpenSignal()
         {
             /*
@@ -54,21 +63,29 @@ namespace XGame
             */
 
             uint bitPerSample = 32;
-            uint SampleCountPerChannel = 100000;
+            uint sampleCountPerChannel = 100000;
             ushort channelCount = 2;
             uint sampleRate = 192000;
+            /*
             uint dataSize = bitPerSample / 8 * SampleCountPerChannel * channelCount;
             Byte[] wavData = new Byte[dataSize];
             Random random = new Random();
             random.NextBytes(wavData);
-            
-            Stream stoneWavStream = WavFile.GenerateWavFileStream(bitPerSample, SampleCountPerChannel, false, channelCount, sampleRate, wavData);
-            SoundPlayer soundPlayer = new SoundPlayer();
+            */
+            //Stream stoneWavStream = WavFile.GenerateWavFileStream(bitPerSample, SampleCountPerChannel, false, channelCount, sampleRate, wavData);
+            /*
+            Stream stoneWavStream = WavFile.GenerateWavFileStream(bitPerSample, sampleCountPerChannel, false, channelCount, sampleRate, 0.5, 2000, Math.PI / 2);
+            */
             stoneWavStream.Position = 0;
-            soundPlayer.Stream = null;
-            soundPlayer.Stream = stoneWavStream;
-            soundPlayer.Load();
-            soundPlayer.PlaySync();
+            stoneSoundPlayer.Stream = null;
+            stoneSoundPlayer.Stream = stoneWavStream;
+            stoneSoundPlayer.Load();
+            stoneSoundPlayer.PlaySync();
+            
+            //FileStream wavFileStream = new FileStream(@"./Test123.wav", FileMode.Create);
+            //byte[] datas = new byte[stoneWavStream.Length];
+            //stoneWavStream.Read(datas, 0, (int)stoneWavStream.Length);
+            //wavFileStream.Write(datas, 0, (int)stoneWavStream.Length);
             //soundPlayer.Play();
         }
 
@@ -113,12 +130,43 @@ namespace XGame
                 //GlobalVariable.
                 GlobalVariable.SetValue("MachineChoice", machineChoice);
 
-                /*
-                if (发出测试信号)
+                
+                if (toOpenSignal == true)
                 {
-                    发出测试信号
+
+                    
+                  
+
+                    //发出测试信号
+                    if (machineChoice == 0)
+                    {
+                        Form1.stoneWavStream.Position = 0;
+                        stoneSoundPlayer.Stream = null;
+                        stoneSoundPlayer.Stream = stoneWavStream;
+                        stoneSoundPlayer.Load();
+                        stoneSoundPlayer.PlaySync();
+                    }
+
+                    if (machineChoice == 1)
+                    {
+                        seissorWavStream.Position = 0;
+                        seissorSoundPlayer.Stream = null;
+                        seissorSoundPlayer.Stream = seissorWavStream;
+                        seissorSoundPlayer.Load();
+                        seissorSoundPlayer.PlaySync();
+                    }
+
+                    if (machineChoice == 2)
+                    {
+                        clothWavStream.Position = 0;
+                        clothSoundPlayer.Stream = null;
+                        clothSoundPlayer.Stream = clothWavStream;
+                        clothSoundPlayer.Load();
+                        clothSoundPlayer.PlaySync();
+                    }
+
                 }
-                */
+                
 
                 isPlayerDoneEvent = (ManualResetEvent)GlobalVariable.GetValue("IsPlayerDoneEvent");
                 isPlayerDoneEvent.WaitOne();
@@ -257,6 +305,29 @@ namespace XGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            uint bitPerSample = 32;
+            uint sampleCountPerChannel = 100000;
+            ushort channelCount = 2;
+            uint sampleRate = 192000;
+            /*
+            uint dataSize = bitPerSample / 8 * SampleCountPerChannel * channelCount;
+            Byte[] wavData = new Byte[dataSize];
+            Random random = new Random();
+            random.NextBytes(wavData);
+            */
+            //Stream stoneWavStream = WavFile.GenerateWavFileStream(bitPerSample, SampleCountPerChannel, false, channelCount, sampleRate, wavData);
+            /*
+            Stream stoneWavStream = WavFile.GenerateWavFileStream(bitPerSample, sampleCountPerChannel, false, channelCount, sampleRate, 0.5, 2000, Math.PI / 2);
+            Stream seissorWavStream = WavFile.GenerateWavFileStream(bitPerSample, sampleCountPerChannel, false, channelCount, sampleRate, 0.5, 4000, Math.PI / 2);
+            Stream clothWavStream = WavFile.GenerateWavFileStream(bitPerSample, sampleCountPerChannel, false, channelCount, sampleRate, 0.5, 6000, Math.PI / 2);
+            */
+
+            if (toOpenSignal)
+            {
+                chcbox_ToOpenSignal.Checked = true;
+            }
+
+            
             Control.CheckForIllegalCrossThreadCalls = false;
             GlobalVariable.SetValue("lbl_WinCount", lbl_WinCount);
             GlobalVariable.SetValue("lbl_DrawCount", lbl_DrawCount);
@@ -372,7 +443,12 @@ namespace XGame
         {
             if (chcbox_ToOpenSignal.Checked == true)
             {
-                ToOpenSignal();
+                //ToOpenSignal();
+                toOpenSignal = true;
+            }
+            else
+            {
+                toOpenSignal = false;
             }
         }
 
